@@ -1,4 +1,4 @@
-char c=Convert.ToChar(Console.ReadLine());
+   char c=Convert.ToChar(Console.ReadLine());
 int i=Convert.ToInt32(Console.ReadLine());
 
 
@@ -62,5 +62,4 @@ void PrintBoard(char column, int row)
     foreach (char ch2 in ch)
         Console.Write(ch2 + " ");
 }
-
 
