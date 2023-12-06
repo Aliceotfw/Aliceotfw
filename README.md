@@ -1,35 +1,60 @@
-   char c=Convert.ToChar(Console.ReadLine());
-int i=Convert.ToInt32(Console.ReadLine());
+using System.Data.Common;
+using System.Runtime.InteropServices;
+
+Console.Write("Enter coordinate1: ");
+string coord1 = Console.ReadLine();
+Console.Write("Enter coordinate2: ");
+string coord2 = Console.ReadLine();
 
 
-PrintBoard(c,i);
 
 
 
-void PrintBoard(char column, int row)
+PrintBoard(coord1);
+Console.WriteLine();
+Console.WriteLine(CheckknightCoord(coord1, coord2)); 
+if(CheckknightCoord(coord1, coord2))
+    PrintBoard(coord2);
+
+
+
+
+
+bool CheckknightCoord(string coord1, string coord2)
 {
-    Console.Clear();
-    Console.WriteLine($"{column}{row}");
+    char column1 = coord1[0];
+    int row1 = int.Parse(coord1.Substring(1));
+    char column2 = coord2[0];
+    int row2 = int.Parse(coord2.Substring(1));
+
+    int rowDifference = Math.Abs(row2 - row1);
+    int columnDifference = Math.Abs(column2 - column1);
+
+    return (rowDifference == 2 && columnDifference == 1) || (rowDifference == 1 && columnDifference == 2);
+}
+
+
+void PrintBoard(string coord1)
+{
+    char column = coord1[0];
+    int row = int.Parse(coord1.Substring(1));
     char[] ch = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
-    Console.Write("  ");
+    Console.Write(" ");
     foreach (char ch2 in ch)
-        Console.Write(ch2 + " ");
-    Console.Write("\n");
-    for (int i = 0; i < 10; i++)
-        Console.Write("--");
+        Console.Write(" " + ch2 + " ");
 
     Console.WriteLine();
 
     for (int i = 1; i < 9; i++)
     {
-        Console.BackgroundColor = ConsoleColor.Black;
-        Console.Write(i + "|");
+        
+        Console.Write(i);
         for (char j = 'A'; j <= 'H'; j++)
         {
             
             if ((i + (int)j) % 2 == 0)
             {
-                Console.BackgroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = ConsoleColor.DarkGray;
             }
             else
             {
@@ -38,28 +63,25 @@ void PrintBoard(char column, int row)
             if (i == row && j == column)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write(" F");
+                Console.Write(" N ");
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("  ");
+                Console.Write("   ");
             }
-                
+                Console.ResetColor();
 
         }
 
-        Console.BackgroundColor = ConsoleColor.Black;
-        Console.Write("|" + i);
-
+        
+        Console.Write(i);
+        
         Console.WriteLine();
     }
 
-    for (int i = 0; i < 10; i++)
-        Console.Write("--");
-    Console.WriteLine();
-    Console.Write("  ");
+    Console.Write(" ");
     foreach (char ch2 in ch)
-        Console.Write(ch2 + " ");
-}
+        Console.Write(" " + ch2 + " ");
+}  
 
